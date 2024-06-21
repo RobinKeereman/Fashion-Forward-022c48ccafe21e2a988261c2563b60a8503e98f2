@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Fashion Forward</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reset.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="logo"><a href="index.html"><img src="/img/Fashion Forward.png" alt="Fashion Forward Logo"></a></h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html" id="contact-link" class="nav-link-current">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="cart-icon">🛒 (<span id="cart-count">0</span>)</div>
+    </header>
+
+    <main>
+        <section>
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy Abel en Robin <br> Syntra Eindwerk 2024</p>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Perform form validation and submission
+            alert('Form successfully submitted!');
+
+            // Redirect to home page
+            location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>
