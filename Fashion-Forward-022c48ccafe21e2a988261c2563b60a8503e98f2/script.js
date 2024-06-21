@@ -8,22 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeCartBtn = document.querySelector('#close-cart');
     const closeProductDetailBtn = document.querySelector('#close-product-detail');
     const cartIcon = document.querySelector('#cart-icon');
+    const searchInput = document.querySelector('#search');
+    const searchButton = document.querySelector('#search-button');
    
     
 
     let shoppingCart = [];
+    let allProducts = [];
 
 
     // Fetch products from API
     async function fetchProducts() {
         const response = await fetch('https://fakestoreapi.com/products');
         const data = await response.json();
+        allProducts = data;
         displayProducts(data);
         console.log(data);
     }
 
     // Display products in the product list
     function displayProducts(products) {
+        productList.innerHTML = '';
         products.forEach(product => {
             const productElement = document.createElement('div');
             productElement.classList.add('product');
@@ -95,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
         const product = await response.json();
         const cartItem = shoppingCart.find(item => item.id === product.id);
-
+        
         if (cartItem) {
             cartItem.quantity++;
         } else {
@@ -201,10 +206,25 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Close Cart button clicked');
         cart.classList.remove('visible');
     });
-    
 
-  
+    // Search functionality
+    function handleSearch(){
+        const query = searchInput.value.toLowerCase();
+        const filteredProducts = allProducts.filter(product => 
+            product.title.toLowerCase().includes(query)
+        );
+        displayProducts(filteredProducts);
+    }
+    
+    //Event Listener for search functionality
+    searchButton.addEventListener('click',handleSearch);
+    searchInput.addEventListener('keyup',(event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    });
 
     // Init: Fetch products from API
     fetchProducts();
 });
+
